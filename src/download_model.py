@@ -80,7 +80,6 @@ def main(model_name=DEFAULT_MODEL, force=False, confirmation=False):
     print("Downloading model...")
     os.makedirs(model_path)
     download_and_extract_model(model, model_path)
-    set_model(model_path)
   elif force:
     if not confirmation:
       confirmation = input("CAUTION: If there is a model present, this will overwrite it. Are you sure? [yN] ")
@@ -91,6 +90,6 @@ def main(model_name=DEFAULT_MODEL, force=False, confirmation=False):
     shutil.rmtree(model_path) if os.path.exists(model_path) else None
     os.makedirs(model_path)
     download_and_extract_model(model, model_path)
-    set_model(model_path)
   else:
-    print(f"Model already exists at {model_path}. No action taken.")
+    print(f"Model already exists at {model_path}.")
+  set_model(model_path)
