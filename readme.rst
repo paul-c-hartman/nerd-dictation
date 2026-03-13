@@ -396,9 +396,9 @@ Example Configurations
 These are example configurations you may use as a reference.
 
 - `Word Replacement
-  <https://github.com/ideasman42/nerd-dictation/blob/master/examples/default/nerd-dictation.py>`__.
+  <https://github.com/paul-c-hartman/nerd-dictation/blob/master/examples/default/nerd-dictation.py>`__.
 - `Start/Finish Commands
-  <https://github.com/ideasman42/nerd-dictation/blob/master/examples/begin_end_commands/nerd-dictation.py>`__.
+  <https://github.com/paul-c-hartman/nerd-dictation/blob/master/examples/begin_end_commands/nerd-dictation.py>`__.
 
 
 Other Software
