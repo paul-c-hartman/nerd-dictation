@@ -31,6 +31,7 @@ def set_model(directory):
   expected_model_path = os.path.join(xdg_config_home, 'nerd-dictation', 'model')
   if os.path.islink(expected_model_path) or os.path.exists(expected_model_path):
     os.remove(expected_model_path)
+  os.makedirs(os.path.dirname(expected_model_path), exist_ok=True)
   print(f"Symlinking from {directory} to {expected_model_path}...")
   os.symlink(directory, expected_model_path)
 
