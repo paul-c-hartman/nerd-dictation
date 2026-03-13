@@ -71,7 +71,7 @@ See ``nerd-dictation begin --help`` for details on how to access these options.
 Dependencies
 ============
 
-- Python 3.6 (or newer).
+- Python 3.6.2 (or newer).
 - The VOSK-API.
 - An audio recording utility (``parec`` by default).
 - An input simulation utility (``xdotool`` by default).
@@ -111,6 +111,12 @@ Install
    unzip vosk-model-small-en-us-0.15.zip
    mv vosk-model-small-en-us-0.15 model
 
+Or alternatively, using `uv <https://github.com/astral-sh/uv>`_:
+
+.. code-block:: sh
+
+   uv tool install --from git+https://github.com/ideasman42/nerd-dictation.git nerd-dictation
+
 To test dictation:
 
 .. code-block:: sh
@@ -118,6 +124,12 @@ To test dictation:
    ./nerd-dictation begin --vosk-model-dir=./model &
    # Start speaking.
    ./nerd-dictation end
+
+Alternatively, using uv:
+
+.. code-block:: sh
+   uvx nerd-dictation begin --vosk-model-dir=./model &
+   # Start speaking.
 
 
 - Reminder that it's up to you to bind begin/end/cancel to actions you can easily access (typically key shortcuts).
