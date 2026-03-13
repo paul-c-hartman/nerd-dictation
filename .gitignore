@@ -8,6 +8,7 @@ __pycache__/
 # Other Python paths.
 *.egg-info/
 .venv/
+__pycache__/
 
 # Fallback location used for the language model.
 /model
