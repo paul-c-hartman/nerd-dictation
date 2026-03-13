@@ -1976,7 +1976,7 @@ def argparse_create_download(subparsers: "argparse._SubParsersAction[argparse.Ar
         dest="model_name",
         type=str,
         help=(
-            "The name of the model to download. Defaults to '{DEFAULT_MODEL}'.\n"
+            f"The name of the model to download. Defaults to '{DEFAULT_MODEL}'.\n"
             + "These can be found at: https://alphacephei.com/vosk/models.\n"
             + "To use a different model, use the URL to the model file as the argument, for example:\n"
             + " --model-name=\"https://alphacephei.com/vosk/models/vosk-model-small-en-us-0.15.zip\"\n"
