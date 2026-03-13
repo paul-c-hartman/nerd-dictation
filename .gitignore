@@ -5,5 +5,9 @@
 __pycache__/
 *.py[cod]
 
+# Other Python paths.
+*.egg-info/
+.venv/
+
 # Fallback location used for the language model.
 /model

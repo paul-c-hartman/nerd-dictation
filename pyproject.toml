@@ -1,3 +1,42 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = 'nerd-dictation'
+version = '1.0.0'
+requires-python = '>=3.10'
+description = 'Simple, hackable offline speech to text - using the VOSK-API.'
+readme = 'README.rst'
+keywords = ['voice', 'dictation', 'vosk', 'speech-to-text', 'speech', 'text']
+license = "GPL-3.0-only"
+classifiers = [
+    "Intended Audience :: End Users/Desktop",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Topic :: Adaptive Technologies",
+    "Topic :: Multimedia :: Sound/Audio :: Conversion",
+    "Topic :: Multimedia :: Sound/Audio :: Speech"
+]
+license-files = ["LICENSE"]
+authors = [
+    {name = "Campbell Barton", email = "ideasman42@gmail.com"}
+]
+dependencies = [
+    "vosk>=0.3.45",
+]
+
+[project.scripts]
+nerd-dictation = 'nerd_dictation:main'
+
+[project.urls]
+Homepage = 'https://github.com/ideasman42/nerd-dictation'
+Repository = 'https://github.com/ideasman42/nerd-dictation'
+Issues = 'https://github.com/ideasman42/nerd-dictation/issues'
+
+[project.optional-dependencies]
+dev = ['black']
+
 [tool.black]
 line-length = 119
 target-version = ['py310']
