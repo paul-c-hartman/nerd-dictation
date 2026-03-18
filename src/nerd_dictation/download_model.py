@@ -48,7 +48,7 @@ def set_model(directory):
   # We download models to $XDG_DATA_HOME/nerd-dictation/models/{model_name},
   # but the tool tries to load a model from $XDG_DATA_HOME/nerd-dictation/model/,
   # so we create a symlink from the expected location to the actual location of the model.
-  expected_model_path = os.path.join(settings.dirs.user_data_path, 'nerd-dictation', 'model')
+  expected_model_path = os.path.join(settings.dirs.user_data_path, 'model')
   # Remove symlink if it exists.
   # This may be a folder
   if os.path.islink(expected_model_path) or os.path.exists(expected_model_path):
@@ -61,7 +61,7 @@ def set_model(directory):
   os.symlink(directory, expected_model_path) # os.symlink takes the destination first for some reason
 
 def main(model_name=DEFAULT_MODEL, force=False, confirmation=False):
-  model_path = os.path.join(settings.dirs.user_data_path, 'nerd-dictation', 'models')
+  model_path = os.path.join(settings.dirs.user_data_path, 'models')
   model = MODELS.get(model_name)
   if model is not None:
     # Not a custom URL
