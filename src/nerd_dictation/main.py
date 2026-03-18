@@ -17,7 +17,7 @@ import tempfile
 import time
 
 # This package's modules.
-from .config import settings
+from nerd_dictation.config import settings
 
 # Types.
 from typing import (

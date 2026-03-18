@@ -1,6 +1,8 @@
 import argparse
 from typing import List, Optional
 from nerd_dictation import main_begin, main_end, main_cancel, main_suspend
+from nerd_dictation.download_model import main as download_model, MODELS, DEFAULT_MODEL
+
 
 def argparse_generic_command_cookie(subparse: argparse.ArgumentParser) -> None:
     subparse.add_argument(
@@ -445,8 +447,6 @@ def argparse_create_download(subparsers: "argparse._SubParsersAction[argparse.Ar
         ),
         formatter_class=argparse.RawTextHelpFormatter,
     )
-
-    from download_model import main as download_model, MODELS, DEFAULT_MODEL
 
     subparse.add_argument(
         "--model",

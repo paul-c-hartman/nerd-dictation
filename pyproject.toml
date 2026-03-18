@@ -28,7 +28,7 @@ dependencies = [
 ]
 
 [project.scripts]
-nerd-dictation = 'cli:main'
+nerd-dictation = 'nerd_dictation.cli:main'
 
 [project.urls]
 Homepage = 'https://github.com/ideasman42/nerd-dictation'
