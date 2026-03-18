@@ -23,11 +23,12 @@ authors = [
     {name = "Campbell Barton", email = "ideasman42@gmail.com"}
 ]
 dependencies = [
+    "platformdirs>=2.4.0",
     "vosk>=0.3.45",
 ]
 
 [project.scripts]
-nerd-dictation = 'nerd_dictation:main'
+nerd-dictation = 'cli:main'
 
 [project.urls]
 Homepage = 'https://github.com/ideasman42/nerd-dictation'
