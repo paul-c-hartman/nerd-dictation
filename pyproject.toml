@@ -16,16 +16,11 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "Topic :: Adaptive Technologies",
     "Topic :: Multimedia :: Sound/Audio :: Conversion",
-    "Topic :: Multimedia :: Sound/Audio :: Speech"
+    "Topic :: Multimedia :: Sound/Audio :: Speech",
 ]
 license-files = ["LICENSE"]
-authors = [
-    {name = "Campbell Barton", email = "ideasman42@gmail.com"}
-]
-dependencies = [
-    "platformdirs>=2.4.0",
-    "vosk>=0.3.45",
-]
+authors = [{ name = "Campbell Barton", email = "ideasman42@gmail.com" }]
+dependencies = ["platformdirs>=2.4.0", "vosk>=0.3.45"]
 
 [project.scripts]
 nerd-dictation = 'nerd_dictation:main_cli'
@@ -41,3 +36,25 @@ dev = ['black']
 [tool.black]
 line-length = 119
 target-version = ['py310']
+
+[tool.pylint.'MESSAGES CONTROL']
+disable = [
+    'C0103',
+    'C0111',
+    'C0301',
+    'C0302',
+    'C0415',
+    'E0401',
+    'E0611',
+    'I1101',
+    'R0801',
+    'R0902',
+    'R0903',
+    'R0912',
+    'R0913',
+    'R0914',
+    'R0915',
+    'R1705',
+    'W0212',
+    'W0703',
+]
