@@ -1,0 +1,95 @@
+import subprocess
+import sys
+import os
+import stat
+import time
+from types import ModuleType
+from typing import Optional, IO, List
+
+"""
+-----------------------------------------------------------------------------
+General Utilities
+"""
+
+def run_command_or_exit_on_failure(cmd: List[str]) -> None:
+    try:
+        subprocess.check_output(cmd)
+    # Don't catch other kinds of exceptions as they should never happen
+    # and can be considered a severe error which doesn't need to be made "user friendly".
+    except FileNotFoundError as ex:
+        sys.stderr.write("Command {!r} not found: {!s}\n".format(cmd[0], ex))
+        sys.exit(1)
+
+def touch(filepath: str, mtime: Optional[int] = None) -> None:
+    if os.path.exists(filepath):
+        os.utime(filepath, None if mtime is None else (mtime, mtime))
+    else:
+        with open(filepath, "ab") as _:
+            pass
+        if mtime is not None:
+            try:
+                os.utime(filepath, (mtime, mtime))
+            except FileNotFoundError:
+                pass
+
+def file_mtime_or_none(filepath: str) -> Optional[int]:
+    try:
+        # For some reason `mypy` thinks this is a float.
+        return int(os.stat(filepath)[stat.ST_MTIME])
+    except FileNotFoundError:
+        return None
+
+def file_age_in_seconds(filepath: str) -> float:
+    """
+    Return the age of the file in seconds.
+    """
+    return time.time() - os.stat(filepath)[stat.ST_MTIME]
+
+def file_remove_if_exists(filepath: str) -> bool:
+    try:
+        os.remove(filepath)
+        return True
+    except OSError:
+        return False
+
+def file_handle_make_non_blocking(file_handle: IO[bytes]) -> None:
+    import fcntl
+
+    # Get current `file_handle` flags.
+    flags = fcntl.fcntl(file_handle.fileno(), fcntl.F_GETFL)
+    fcntl.fcntl(file_handle, fcntl.F_SETFL, flags | os.O_NONBLOCK)
+
+def execfile(filepath: str, mod: Optional[ModuleType] = None) -> Optional[ModuleType]:
+    """
+    Execute a file path as a Python script.
+    """
+    import importlib.util
+
+    if not os.path.exists(filepath):
+        raise FileNotFoundError('File not found "{:s}"'.format(filepath))
+
+    mod_name = "__main__"
+    mod_spec = importlib.util.spec_from_file_location(mod_name, filepath)
+    if mod_spec is None:
+        raise Exception("Unable to retrieve the module-spec from %r" % filepath)
+    if mod is None:
+        mod = importlib.util.module_from_spec(mod_spec)
+
+    # While the module name is not added to `sys.modules`, it's important to temporarily
+    # include this so statements such as `sys.modules[cls.__module__].__dict__` behave as expected.
+    # See: https://bugs.python.org/issue9499 for details.
+    modules = sys.modules
+    mod_orig = modules.get(mod_name, None)
+    modules[mod_name] = mod
+
+    # No error suppression, just ensure `sys.modules[mod_name]` is properly restored in the case of an error.
+    try:
+        # `mypy` doesn't know about this function.
+        mod_spec.loader.exec_module(mod)  # type: ignore
+    finally:
+        if mod_orig is None:
+            modules.pop(mod_name, None)
+        else:
+            modules[mod_name] = mod_orig
+
+    return mod
