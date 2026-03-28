@@ -7,52 +7,16 @@ import sys
 import tempfile
 import time
 
+# Types.
+from typing import Optional
+
 # This package's modules.
 from nerd_dictation.config import settings
-from nerd_dictation.utilities import *
+from nerd_dictation.utilities import touch, file_mtime_or_none, file_age_in_seconds, file_remove_if_exists
 from nerd_dictation.post_processors import process_text
 from nerd_dictation.vosk import text_from_vosk_pipe
 from nerd_dictation.simulate_input import input_fns
 
-# Types.
-from typing import Optional
-from types import ModuleType
-
-# -----------------------------------------------------------------------------
-# Custom Configuration
-#
-# TODO: we aren't touching this section because we're going to tear it up and
-# replace it with setuptools entry points. not pulling this out to its own
-# module
-
-def user_config_as_module_or_none(
-    config_override: Optional[str],
-    user_config_prev: Optional[ModuleType],
-) -> Optional[ModuleType]:
-    # Explicitly ask for no configuration.
-    if config_override == "":
-        return None
-    if config_override is None:
-        user_config_path = os.path.join(settings.dirs.user_config_path, "nerd-dictation.py")
-        if not os.path.exists(user_config_path):
-            return None
-    else:
-        user_config_path = config_override
-        # Allow the exception for a custom configuration.
-
-    try:
-        user_config = execfile(user_config_path)
-    except Exception as ex:
-        sys.stderr.write('Failed to run "{:s}" with error: {:s}\n'.format(user_config_path, str(ex)))
-        if user_config_prev is not None:
-            # Reloading configuration at run-time, don't exit in this case - use the previous config instead.
-            sys.stderr.write("Reload failed, continuing with previous configuration.\n")
-            user_config = user_config_prev
-        else:
-            # Exit if the user starts with an invalid configuration.
-            sys.exit(1)
-
-    return user_config
 
 def main_begin(
     *,
@@ -72,7 +36,6 @@ def main_begin(
     idle_time: float = 0.0,
     delay_exit: float = 0.0,
     punctuate_from_previous_timeout: float = 0.0,
-    config_override: Optional[str],
     output: str = "TYPE",
     simulate_input_tool: str = "XDOTOOL",
     suspend_on_start: bool = False,
@@ -126,9 +89,6 @@ def main_begin(
 
     touch_mtime = None
     use_overtime = delay_exit > 0.0 and timeout == 0.0
-
-    # Lazy loaded so recording can start 1st.
-    user_config = None
 
     def exit_fn(handled_any: bool) -> int:
         nonlocal touch_mtime
@@ -190,7 +150,7 @@ def main_begin(
     if output == "SIMULATE_INPUT":
         handle_fn = input_fns.get(simulate_input_tool)
         if handle_fn is None:
-            raise Exception("Internal error, unknown input tool: {!r}".format(simulate_input_tool))
+            raise RuntimeError(f"Internal error, unknown input tool: {simulate_input_tool!r}")
 
     else:
         # Unreachable.
@@ -219,6 +179,7 @@ def main_begin(
         touch(path_to_cookie)
         return
 
+
 def main_end(
     *,
     path_to_cookie: str = "",
@@ -231,6 +192,7 @@ def main_end(
 
     touch(path_to_cookie)
 
+
 def main_cancel(
     *,
     path_to_cookie: str = "",
@@ -242,6 +204,7 @@ def main_cancel(
     main_suspend(path_to_cookie=path_to_cookie, suspend=False, verbose=0)
 
     file_remove_if_exists(path_to_cookie)
+
 
 def main_suspend(
     *,
@@ -256,7 +219,7 @@ def main_suspend(
 
     if not os.path.exists(path_to_cookie):
         if verbose >= 1:
-            sys.stderr.write("No running nerd-dictation cookie found at: {:s}, abort!\n".format(path_to_cookie))
+            sys.stderr.write(f"No running nerd-dictation cookie found at: {path_to_cookie}, abort!\n")
         return
 
     with open(path_to_cookie, "r", encoding="utf-8") as fh:
@@ -265,7 +228,7 @@ def main_suspend(
         pid = int(data)
     except Exception as ex:
         if verbose >= 1:
-            sys.stderr.write("Failed to read PID with error {!r}, abort!\n".format(ex))
+            sys.stderr.write(f"Failed to read PID with error {ex}, abort!\n")
         return
 
     if suspend:

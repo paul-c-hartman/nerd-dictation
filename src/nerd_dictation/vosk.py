@@ -6,6 +6,7 @@ from typing import IO, Tuple, Callable, List, Optional
 from nerd_dictation.utilities import file_handle_make_non_blocking
 from nerd_dictation.config import settings
 
+
 def recording_proc_with_non_blocking_stdout(
     input_method: str,
     sample_rate: int,
@@ -16,9 +17,9 @@ def recording_proc_with_non_blocking_stdout(
         cmd = (
             "parec",
             "--record",
-            "--rate=%d" % sample_rate,
+            f"--rate={sample_rate}",
             "--channels=1",
-            *(("--device=%s" % pulse_device_name,) if pulse_device_name else ()),
+            *((f"--device={pulse_device_name}",) if pulse_device_name else ()),
             "--format=s16ne",
             "--latency=10",
         )
@@ -31,7 +32,7 @@ def recording_proc_with_non_blocking_stdout(
             "--buffer",
             "1000",
             "-r",
-            "%d" % sample_rate,
+            f"{sample_rate}",
             "-b",
             "16",
             "-e",
@@ -49,12 +50,12 @@ def recording_proc_with_non_blocking_stdout(
             "--record",
             "--format=s16",
             "--rate",
-            str(sample_rate),
+            f"{sample_rate}",
             "--channels=1",
             "-",
         )
     else:
-        sys.stderr.write("--input %r not supported.\n" % input_method)
+        sys.stderr.write(f"--input {input_method!r} not supported.\n")
         sys.exit(1)
 
     ps = subprocess.Popen(cmd, stdout=subprocess.PIPE)
@@ -89,8 +90,7 @@ def text_from_vosk_pipe(
 
     if not os.path.exists(vosk_model_dir):
         sys.stderr.write(
-            "Please download the model from "
-            "https://alphacephei.com/vosk/models and unpack it to {!r}.\n".format(vosk_model_dir)
+            f"Please download the model from https://alphacephei.com/vosk/models and unpack it to {vosk_model_dir!r}.\n"
         )
         sys.exit(1)
 
@@ -406,4 +406,3 @@ def text_from_vosk_pipe(
         handle_fn(0, process_fn(" ".join(text_list)))
 
     return handled_any
-

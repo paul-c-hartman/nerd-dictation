@@ -1,6 +1,7 @@
 from nerd_dictation.utilities import run_command_or_exit_on_failure
 from nerd_dictation.config import settings
 
+
 def simulate_typing_with_xdotool(delete_prev_chars: int, text: str) -> None:
     cmd = "xdotool"
 

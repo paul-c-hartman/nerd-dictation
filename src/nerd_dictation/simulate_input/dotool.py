@@ -33,7 +33,7 @@ def simulate_typing_with_dotool(delete_prev_chars: int, text: str, cmd: str = "d
             # Not needed, just basic hygiene not to keep killed process reference.
             simulate_typing_with_dotool_proc = None
         else:
-            raise Exception("Internal error, unknown command {!r}".format(text))
+            raise RuntimeError("Internal error, unknown command {!r}".format(text))
         return
 
     assert simulate_typing_with_dotool_proc is not None

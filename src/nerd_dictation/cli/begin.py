@@ -2,6 +2,7 @@ import argparse
 from nerd_dictation.cli._common import argparse_cookie
 from nerd_dictation import main_begin
 
+
 def callback(args: argparse.Namespace) -> None:
     main_begin(
         path_to_cookie=args.path_to_cookie,
@@ -20,13 +21,13 @@ def callback(args: argparse.Namespace) -> None:
         idle_time=min(args.idle_time, 0.5),
         delay_exit=args.delay_exit,
         punctuate_from_previous_timeout=args.punctuate_from_previous_timeout,
-        config_override=args.config,
         output=args.output,
         simulate_input_tool=args.simulate_input_tool,
         suspend_on_start=args.suspend_on_start,
         verbose=args.verbose,
         vosk_grammar_file=args.vosk_grammar_file,
     )
+
 
 def main(subparsers: "argparse._SubParsersAction[argparse.ArgumentParser]") -> None:
     subparse = subparsers.add_parser(

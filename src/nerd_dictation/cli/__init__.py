@@ -13,6 +13,7 @@ This is a utility that activates speech to text on Linux.
 While it could use any system currently it uses the VOSK-API.
 """
 
+
 def argparse_create() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=description, formatter_class=argparse.RawTextHelpFormatter)
 

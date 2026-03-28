@@ -3,12 +3,16 @@ This file implements an example post-processor that capitalizes every word in th
 It's meant to be used solely as an example of how to implement a post-processor.
 """
 
+from typing import Any, Optional
 from nerd_dictation.post_processors import register_post_processor
-from typing import Any
 
-def capitalize_all_words(words: list[str], options: dict[str, Any] = {}) -> list[str]:
-    for i in range(len(words)):
-        words[i] = words[i].capitalize()
+
+def capitalize_all_words(words: list[str], options: Optional[dict[str, Any]] = None) -> list[str]:
+    if options is None:
+        options = {}
+    for i, word in enumerate(words):
+        words[i] = word.capitalize()
     return words
 
-register_post_processor("_example", capitalize_all_words)
+
+register_post_processor("_example", 10, capitalize_all_words)

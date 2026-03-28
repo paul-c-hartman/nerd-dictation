@@ -6,10 +6,9 @@ import time
 from types import ModuleType
 from typing import Optional, IO, List
 
-"""
------------------------------------------------------------------------------
-General Utilities
-"""
+# -----------------------------------------------------------------------------
+# General Utilities
+
 
 def run_command_or_exit_on_failure(cmd: List[str]) -> None:
     try:
@@ -17,8 +16,9 @@ def run_command_or_exit_on_failure(cmd: List[str]) -> None:
     # Don't catch other kinds of exceptions as they should never happen
     # and can be considered a severe error which doesn't need to be made "user friendly".
     except FileNotFoundError as ex:
-        sys.stderr.write("Command {!r} not found: {!s}\n".format(cmd[0], ex))
+        sys.stderr.write(f"Command {cmd[0]!r} not found: {ex}\n")
         sys.exit(1)
+
 
 def touch(filepath: str, mtime: Optional[int] = None) -> None:
     if os.path.exists(filepath):
@@ -32,6 +32,7 @@ def touch(filepath: str, mtime: Optional[int] = None) -> None:
             except FileNotFoundError:
                 pass
 
+
 def file_mtime_or_none(filepath: str) -> Optional[int]:
     try:
         # For some reason `mypy` thinks this is a float.
@@ -39,11 +40,13 @@ def file_mtime_or_none(filepath: str) -> Optional[int]:
     except FileNotFoundError:
         return None
 
+
 def file_age_in_seconds(filepath: str) -> float:
     """
     Return the age of the file in seconds.
     """
     return time.time() - os.stat(filepath)[stat.ST_MTIME]
+
 
 def file_remove_if_exists(filepath: str) -> bool:
     try:
@@ -52,12 +55,14 @@ def file_remove_if_exists(filepath: str) -> bool:
     except OSError:
         return False
 
+
 def file_handle_make_non_blocking(file_handle: IO[bytes]) -> None:
     import fcntl
 
     # Get current `file_handle` flags.
     flags = fcntl.fcntl(file_handle.fileno(), fcntl.F_GETFL)
     fcntl.fcntl(file_handle, fcntl.F_SETFL, flags | os.O_NONBLOCK)
+
 
 def execfile(filepath: str, mod: Optional[ModuleType] = None) -> Optional[ModuleType]:
     """
@@ -66,12 +71,12 @@ def execfile(filepath: str, mod: Optional[ModuleType] = None) -> Optional[Module
     import importlib.util
 
     if not os.path.exists(filepath):
-        raise FileNotFoundError('File not found "{:s}"'.format(filepath))
+        raise FileNotFoundError(f'File not found "{filepath}"')
 
     mod_name = "__main__"
     mod_spec = importlib.util.spec_from_file_location(mod_name, filepath)
     if mod_spec is None:
-        raise Exception("Unable to retrieve the module-spec from %r" % filepath)
+        raise RuntimeError(f"Unable to retrieve the module-spec from {filepath!r}")
     if mod is None:
         mod = importlib.util.module_from_spec(mod_spec)
 

@@ -1,6 +1,7 @@
 from typing import Tuple, Dict, Set, List, Optional, Any
 from nerd_dictation.post_processors import register_post_processor
 
+
 def from_words_to_digits_setup_once() -> (
     Tuple[Dict[str, Tuple[int, int, str, bool]], Set[str], Set[str], Set[str], Set[str]]
 ):
@@ -111,6 +112,7 @@ def from_words_to_digits_setup_once() -> (
         valid_scale_words,
         valid_zero_words,
     )
+
 
 # Originally based on: https://ao.gl/how-to-convert-numeric-words-into-numbers-using-python/
 # A module like class can't be instanced.
@@ -389,7 +391,8 @@ class from_words_to_digits:
                         continue
 
                     word_list[i:i_next] = [
-                        ("{:,d}".format(int(number)) if (numbers_use_separator and allow_reformat) else number) + suffix
+                        ("{:,d}".format(int(number)) if (numbers_use_separator and allow_reformat) else number)
+                        + suffix
                     ]
 
                     if (i_number_prev != -1) and (i_number_prev + 1 != i):
@@ -440,7 +443,10 @@ class from_words_to_digits:
             else:
                 i += 1
 
-def replace_numbers(words: list[str], options: dict[str, Any] = {}) -> list[str]:
+
+def replace_numbers(words: list[str], options: Optional[dict[str, Any]] = None) -> list[str]:
+    if options is None:
+        options = {}
     from_words_to_digits.parse_numbers_in_word_list(
         words,
         numbers_use_separator=options.get("numbers_use_separator", False),
@@ -448,6 +454,7 @@ def replace_numbers(words: list[str], options: dict[str, Any] = {}) -> list[str]
         numbers_no_suffix=options.get("numbers_no_suffix", False),
     )
     return words
+
 
 # Priority 10 as a sensible default
 register_post_processor("numbers", 10, replace_numbers)
