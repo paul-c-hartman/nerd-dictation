@@ -19,7 +19,7 @@ def main(subparsers: "argparse._SubParsersAction[argparse.ArgumentParser]") -> N
             "Resume recording audio & the dictation process.\n"
             "\n"
             "This is to be used to resume after the 'suspend' command.\n"
-            "When nerd-dictation is not suspended, this does nothing.\n"
+            "When pytater is not suspended, this does nothing.\n"
         ),
         formatter_class=argparse.RawTextHelpFormatter,
     )

@@ -70,7 +70,7 @@ See `pytater begin --help` for details on how to access these options.
 You may select one of the following tools.
 
 - `parec` command for recording from pulse-audio.
-- `sox` command as alternative, see the guide: [Using sox with nerd-dictation](readme-sox.rst).
+- `sox` command as alternative, see the guide: [Using sox with pytater](readme-sox.md).
 - `pw-cat` command for recording from pipewire.
 
 ### Input Simulation Utilities
@@ -79,7 +79,7 @@ You may select one of the following input simulation utilities.
 
 - [xdotool](https://github.com/jordansissel/xdotool) command to simulate input in X11.
 - [ydotool](https://github.com/ReimuNotMoe/ydotool) command to simulate input anywhere (X11/Wayland/TTYs).
-  See the setup guide: [Using ydotool with nerd-dictation](readme-ydotool.md).
+  See the setup guide: [Using ydotool with pytater](readme-ydotool.md).
 - [dotool](https://git.sr.ht/~geb/dotool) command to simulate input anywhere (X11/Wayland/TTYs).
 - [wtype](https://github.com/atx/wtype) to simulate input in Wayland".
 
@@ -131,13 +131,6 @@ Store the result of speech to text as a variable in the shell:
 ```sh
 SPEECH="$(pytater begin --timeout=1.0 --output=STDOUT)"
 ```
-
-### Example Configurations
-
-These are example configurations you may use as a reference.
-
-- [Word Replacement](examples/default/nerd-dictation.py)
-- [Start/Finish Commands](examples/begin_end_commands/nerd-dictation.py)
 
 ## Limitations
 

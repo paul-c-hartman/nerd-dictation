@@ -16,8 +16,8 @@ def main(subparsers: "argparse._SubParsersAction[argparse.ArgumentParser]") -> N
             "A model is required for dictation to work. Available models can be viewed at:\n"
             "https://alphacephei.com/vosk/models\n"
             "\n"
-            "This simply downloads and extracts a model into the default location used by nerd-dictation,\n"
-            "which is probably $XDG_CONFIG_DIR/nerd-dictation/model\n"
+            "This simply downloads and extracts a model into the default location used by pytater,\n"
+            "which is probably $XDG_CONFIG_DIR/pytater/model\n"
         ),
         formatter_class=argparse.RawTextHelpFormatter,
     )

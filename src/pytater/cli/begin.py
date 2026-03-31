@@ -178,7 +178,7 @@ def main(subparsers: "argparse._SubParsersAction[argparse.ArgumentParser]") -> N
         action="store_true",
         help=(
             "Start the process and immediately suspend.\n"
-            "Intended for use when nerd-dictation is kept open\n"
+            "Intended for use when pytater is kept open\n"
             "where resume/suspend is used for dictation instead of begin/end."
         ),
         required=False,
@@ -267,7 +267,7 @@ def main(subparsers: "argparse._SubParsersAction[argparse.ArgumentParser]") -> N
             "- ``PAREC`` (external command, default)\n"
             "  See --pulse-device-name option to use a specific pulse-audio device.\n"
             "- ``SOX`` (external command)\n"
-            "  For help on setting up sox, see ``readme-sox.rst`` in the nerd-dictation repository.\n"
+            "  For help on setting up sox, see ``readme-sox.md`` in the pytater repository.\n"
             "- ``PW-CAT`` (external command)\n"
         ),
         required=False,
@@ -305,7 +305,7 @@ def main(subparsers: "argparse._SubParsersAction[argparse.ArgumentParser]") -> N
             "- ``YDOTOOL`` Compatible with all Linux distributions and Wayland but requires some setup.\n"
             "- ``WTYPE`` Compatible with Wayland.\n"
             "- ``STDOUT`` Bare stdout with Ctrl-H for backspaces.\n"
-            "  For help on setting up ydotool, see ``readme-ydotool.rst`` in the nerd-dictation repository.\n"
+            "  For help on setting up ydotool, see ``readme-ydotool.md`` in the pytater repository.\n"
         ),
         required=False,
     )

@@ -1,4 +1,4 @@
-# Using `sox` with nerd-dictation
+# Using `sox` with pytater
 
 This guide explains how to configure `sox` for recording audio with `pytater`.
 

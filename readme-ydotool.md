@@ -1,4 +1,4 @@
-# Using `ydotool` with nerd-dictation
+# Using `ydotool` with pytater
 
 This guide explains how to get and configure `ydotool` to simulate typing with `pytater`, which brings support for typing on Wayland and languages other than English.
 

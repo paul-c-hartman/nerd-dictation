@@ -10,7 +10,7 @@ features which may be personal for your own usage should be implemented in your 
 
 This code base is designed to be easily hacked on.
 
-- Single file code-base (the contents of `nerd-dictation`).
+- Single file code-base (the contents of `pytater`).
 - Only built in modules are used (besides `vosk` for speech to text).
 - So far this has only tested on Linux/X11
   *(support for other platforms may be added in the future).*
@@ -20,9 +20,9 @@ This code base is designed to be easily hacked on.
 
 ### Style
 
-- Auto formatting is handled with black by running: `black nerd-dictation`
-- Ensure correct type annotations by running: `mypy --strict nerd-dictation`.
-- Check for errors with: `pylint nerd-dictation`
+- Auto formatting is handled with black by running: `black pytater`
+- Ensure correct type annotations by running: `mypy --strict pytater`.
+- Check for errors with: `pylint pytater`
 
 
 ## Technical Details

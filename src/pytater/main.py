@@ -50,7 +50,7 @@ def main_begin(
 
     # Find language model in:
     # - `--vosk-model-dir=...`
-    # - `~/.config/nerd-dictation/model`
+    # - `~/.config/pytater/model`
     if not vosk_model_dir:
         vosk_model_dir = os.path.join(settings.dirs.user_data_path, "model")
         # If this still doesn't exist the error is handled later.
@@ -219,7 +219,7 @@ def main_suspend(
 
     if not os.path.exists(path_to_cookie):
         if verbose >= 1:
-            sys.stderr.write(f"No running nerd-dictation cookie found at: {path_to_cookie}, abort!\n")
+            sys.stderr.write(f"No running pytater cookie found at: {path_to_cookie}, abort!\n")
         return
 
     with open(path_to_cookie, "r", encoding="utf-8") as fh:

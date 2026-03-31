@@ -48,8 +48,8 @@ def download_and_extract_model(model_url, extract_to):
 
 
 def set_model(directory):
-    # We download models to $XDG_DATA_HOME/nerd-dictation/models/{model_name},
-    # but the tool tries to load a model from $XDG_DATA_HOME/nerd-dictation/model/,
+    # We download models to $XDG_DATA_HOME/pytater/models/{model_name},
+    # but the tool tries to load a model from $XDG_DATA_HOME/pytater/model/,
     # so we create a symlink from the expected location to the actual location of the model.
     expected_model_path = os.path.join(settings.dirs.user_data_path, "model")
     # Remove symlink if it exists.
@@ -75,7 +75,7 @@ def main(model_name=DEFAULT_MODEL, force=False, confirmation=False):
         # Assume it's a custom URL
         print(f"Using custom model URL: {model_name}")
         print("WARNING: The `download` subcommand can only load one custom-URL model at a time.")
-        print("Consider using `--vosk-model-dir` when calling `nerd-dictation begin` instead.")
+        print("Consider using `--vosk-model-dir` when calling `pytater begin` instead.")
         model_path = os.path.join(model_path, "custom_model")
 
     if not os.path.exists(model_path):
