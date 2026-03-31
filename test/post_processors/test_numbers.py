@@ -1,5 +1,6 @@
 # from nerd_dictation.post_processors.numbers import replace_numbers
-from nerd_dictation.post_processors import process_text
+from pytater.post_processors import process_text
+
 
 def test_numbers() -> None:
     mappings = {
@@ -18,4 +19,4 @@ def test_numbers() -> None:
         "ensure consecutive numbers don't get merged: one hundred two hundred": "ensure consecutive numbers don't get merged: 100 200",
     }
     for input_text, expected_output in mappings.items():
-        assert process_text(input_text, {'numbers': {'enabled': True}}) == expected_output
+        assert process_text(input_text, {"numbers": {"enabled": True}}) == expected_output

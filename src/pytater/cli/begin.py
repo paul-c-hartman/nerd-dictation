@@ -1,6 +1,6 @@
 import argparse
-from nerd_dictation.cli._common import argparse_cookie
-from nerd_dictation import main_begin
+from pytater.cli._common import argparse_cookie
+from pytater import main_begin
 
 
 def callback(args: argparse.Namespace) -> None:

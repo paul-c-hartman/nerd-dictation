@@ -1,4 +1,4 @@
-from nerd_dictation.vosk import *
+from pytater.vosk import *
 
 # `vosk.py` can't really be tested in an
 # environment that doesn't have model files or

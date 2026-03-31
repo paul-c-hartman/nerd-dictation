@@ -1,7 +1,7 @@
 import subprocess
 import os
 from typing import Optional
-from nerd_dictation.config import settings
+from pytater.config import settings
 
 # NOTE: typed as a string for Py3.6 compatibility.
 simulate_typing_with_dotool_proc: "Optional[subprocess.Popen[str]]" = None

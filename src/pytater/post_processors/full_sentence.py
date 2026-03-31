@@ -1,5 +1,5 @@
 from typing import Any, Optional
-from nerd_dictation.post_processors import register_post_processor
+from pytater.post_processors import register_post_processor
 
 
 def full_sentence(words: list[str], options: Optional[dict[str, Any]] = None) -> list[str]:

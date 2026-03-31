@@ -1,6 +1,7 @@
-from nerd_dictation.post_processors import process_text
+from pytater.post_processors import process_text
 
-import nerd_dictation.post_processors.full_sentence
+import pytater.post_processors.full_sentence
+
 
 def test_full_sentence() -> None:
     mappings = {

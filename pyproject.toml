@@ -3,11 +3,11 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = 'nerd-dictation'
+name = 'pytater'
 version = '1.0.0'
 requires-python = '>=3.6.2'
-description = 'Simple, hackable offline speech to text - using the VOSK-API.'
-readme = 'README.rst'
+description = 'Offline speech to text using VOSK. Based on nerd-dictation.'
+readme = 'README.md'
 keywords = ['voice', 'dictation', 'vosk', 'speech-to-text', 'speech', 'text']
 license = "GPL-2.0-or-later"
 classifiers = [
@@ -19,16 +19,19 @@ classifiers = [
     "Topic :: Multimedia :: Sound/Audio :: Speech",
 ]
 license-files = ["LICENSE"]
-authors = [{ name = "Campbell Barton", email = "ideasman42@gmail.com" }]
+authors = [
+    { name = "Campbell Barton", email = "ideasman42@gmail.com" },
+    { name = "Paul Hartman", email = "contact@paulhartman.dev" },
+]
 dependencies = ["platformdirs>=2.4.0", "vosk>=0.3.45"]
 
 [project.scripts]
-nerd-dictation = 'nerd_dictation:main_cli'
+pytater = 'pytater:main_cli'
 
 [project.urls]
-Homepage = 'https://github.com/ideasman42/nerd-dictation'
-Repository = 'https://github.com/ideasman42/nerd-dictation'
-Issues = 'https://github.com/ideasman42/nerd-dictation/issues'
+Homepage = 'https://github.com/paul-c-hartman/pytater'
+Repository = 'https://github.com/paul-c-hartman/pytater'
+Issues = 'https://github.com/paul-c-hartman/pytater/issues'
 
 [tool.black]
 line-length = 119

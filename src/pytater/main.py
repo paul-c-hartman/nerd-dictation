@@ -11,11 +11,11 @@ import time
 from typing import Optional
 
 # This package's modules.
-from nerd_dictation.config import settings
-from nerd_dictation.utilities import touch, file_mtime_or_none, file_age_in_seconds, file_remove_if_exists
-from nerd_dictation.post_processors import process_text
-from nerd_dictation.vosk import text_from_vosk_pipe
-from nerd_dictation.simulate_input import input_fns
+from pytater.config import settings
+from pytater.utilities import touch, file_mtime_or_none, file_age_in_seconds, file_remove_if_exists
+from pytater.post_processors import process_text
+from pytater.vosk import text_from_vosk_pipe
+from pytater.simulate_input import input_fns
 
 
 def main_begin(

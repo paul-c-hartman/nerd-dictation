@@ -1,5 +1,6 @@
 import pytest
-from nerd_dictation.utilities import *
+from pytater.utilities import *
+
 
 def test_run_command_or_exit_on_failure():
     run_command_or_exit_on_failure(["echo", "Hello, World!"])
@@ -7,6 +8,7 @@ def test_run_command_or_exit_on_failure():
     with pytest.raises(SystemExit) as exc_info:
         run_command_or_exit_on_failure(["nonexistent_command"])
     assert exc_info.value.code == 1
+
 
 def test_touch():
     test_file = "__test_touch_file.txt"
@@ -30,6 +32,7 @@ def test_touch():
     # Clean up after the test.
     os.remove(test_file)
 
+
 def test_file_mtime_or_none():
     test_file = "__test_file_mtime_or_none.txt"
 
@@ -49,6 +52,7 @@ def test_file_mtime_or_none():
     # Clean up after the test.
     os.remove(test_file)
 
+
 def test_file_age_in_seconds():
     test_file = "__test_file_age_in_seconds.txt"
 
@@ -65,6 +69,7 @@ def test_file_age_in_seconds():
     # Clean up after the test.
     os.remove(test_file)
 
+
 def test_file_remove_if_exists():
     test_file = "__test_file_remove_if_exists.txt"
 
@@ -80,6 +85,7 @@ def test_file_remove_if_exists():
         f.write("Test content")
     assert file_remove_if_exists(test_file)
     assert not os.path.exists(test_file)
+
 
 def test_file_handle_make_non_blocking():
     import io
@@ -102,6 +108,7 @@ def test_file_handle_make_non_blocking():
         r_file.close()
         w_file.close()
 
+
 def test_file_handle_make_non_blocking_on_non_blocking_file():
     import io
 
@@ -119,6 +126,7 @@ def test_file_handle_make_non_blocking_on_non_blocking_file():
     finally:
         r_file.close()
         w_file.close()
+
 
 def test_execfile():
     test_file = "__test_execfile.py"

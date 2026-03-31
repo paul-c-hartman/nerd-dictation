@@ -1,5 +1,5 @@
 import sys
-from nerd_dictation.config import settings
+from pytater.config import settings
 
 
 def simulate_typing_with_stdout(delete_prev_chars: int, text: str) -> None:

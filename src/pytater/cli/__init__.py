@@ -1,11 +1,11 @@
 import argparse
 from typing import List, Optional
-from nerd_dictation.cli.begin import main as argparse_create_begin
-from nerd_dictation.cli.end import main as argparse_create_end
-from nerd_dictation.cli.cancel import main as argparse_create_cancel
-from nerd_dictation.cli.suspend import main as argparse_create_suspend
-from nerd_dictation.cli.resume import main as argparse_create_resume
-from nerd_dictation.cli.download import main as argparse_create_download
+from pytater.cli.begin import main as argparse_create_begin
+from pytater.cli.end import main as argparse_create_end
+from pytater.cli.cancel import main as argparse_create_cancel
+from pytater.cli.suspend import main as argparse_create_suspend
+from pytater.cli.resume import main as argparse_create_resume
+from pytater.cli.download import main as argparse_create_download
 
 description = """
 This is a utility that activates speech to text on Linux.

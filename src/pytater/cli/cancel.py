@@ -1,21 +1,19 @@
 import argparse
-from nerd_dictation.cli._common import argparse_cookie
-from nerd_dictation.main import main_end
+from pytater.cli._common import argparse_cookie
+from pytater.main import main_cancel
 
 
 def callback(args: argparse.Namespace) -> None:
-    main_end(
+    main_cancel(
         path_to_cookie=args.path_to_cookie,
     )
 
 
 def main(subparsers: "argparse._SubParsersAction[argparse.ArgumentParser]") -> None:
     subparse = subparsers.add_parser(
-        "end",
-        help="End dictation.",
-        description="""\
-This ends dictation, causing the text to be typed in.
-    """,
+        "cancel",
+        help="Cancel dictation.",
+        description="This cancels dictation.",
         formatter_class=argparse.RawTextHelpFormatter,
     )
 

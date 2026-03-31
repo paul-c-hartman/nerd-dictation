@@ -1242,51 +1242,6 @@ wheels = [
 ]
 
 [[package]]
-name = "nerd-dictation"
-version = "1.0.0"
-source = { editable = "." }
-dependencies = [
-    { name = "platformdirs", version = "2.4.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.7'" },
-    { name = "platformdirs", version = "4.0.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.7.*'" },
-    { name = "platformdirs", version = "4.3.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.8.*'" },
-    { name = "platformdirs", version = "4.4.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.9.*'" },
-    { name = "platformdirs", version = "4.9.4", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10'" },
-    { name = "vosk" },
-]
-
-[package.dev-dependencies]
-dev = [
-    { name = "black", version = "22.8.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.7'" },
-    { name = "black", version = "23.3.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.7.*'" },
-    { name = "black", version = "24.8.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.8.*'" },
-    { name = "black", version = "25.11.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.9.*'" },
-    { name = "black", version = "26.3.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10'" },
-    { name = "pylint", version = "2.13.9", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.7.2'" },
-    { name = "pylint", version = "2.17.7", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.7.2' and python_full_version < '3.8'" },
-    { name = "pylint", version = "3.2.7", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.8.*'" },
-    { name = "pylint", version = "3.3.9", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.9.*'" },
-    { name = "pylint", version = "4.0.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10'" },
-    { name = "pytest", version = "7.0.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.7'" },
-    { name = "pytest", version = "7.4.4", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.7.*'" },
-    { name = "pytest", version = "8.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.8.*'" },
-    { name = "pytest", version = "8.4.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.9.*'" },
-    { name = "pytest", version = "9.0.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10'" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "platformdirs", specifier = ">=2.4.0" },
-    { name = "vosk", specifier = ">=0.3.45" },
-]
-
-[package.metadata.requires-dev]
-dev = [
-    { name = "black", specifier = ">=22.8.0" },
-    { name = "pylint", specifier = ">=2.13.9" },
-    { name = "pytest", specifier = ">=7.0.1" },
-]
-
-[[package]]
 name = "packaging"
 version = "21.3"
 source = { registry = "https://pypi.org/simple" }
@@ -1715,6 +1670,51 @@ resolution-markers = [
 sdist = { url = "https://files.pythonhosted.org/packages/83/08/13f3bce01b2061f2bbd582c9df82723de943784cf719a35ac886c652043a/pyparsing-3.1.4.tar.gz", hash = "sha256:f86ec8d1a83f11977c9a6ea7598e8c27fc5cddfa5b07ea2241edbbde1d7bc032", size = 900231, upload-time = "2024-08-25T15:00:47.416Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/e5/0c/0e3c05b1c87bb6a1c76d281b0f35e78d2d80ac91b5f8f524cebf77f51049/pyparsing-3.1.4-py3-none-any.whl", hash = "sha256:a6a7ee4235a3f944aa1fa2249307708f893fe5717dc603503c6c7969c070fb7c", size = 104100, upload-time = "2024-08-25T15:00:45.361Z" },
+]
+
+[[package]]
+name = "pytater"
+version = "1.0.0"
+source = { editable = "." }
+dependencies = [
+    { name = "platformdirs", version = "2.4.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.7'" },
+    { name = "platformdirs", version = "4.0.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.7.*'" },
+    { name = "platformdirs", version = "4.3.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.8.*'" },
+    { name = "platformdirs", version = "4.4.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.9.*'" },
+    { name = "platformdirs", version = "4.9.4", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10'" },
+    { name = "vosk" },
+]
+
+[package.dev-dependencies]
+dev = [
+    { name = "black", version = "22.8.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.7'" },
+    { name = "black", version = "23.3.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.7.*'" },
+    { name = "black", version = "24.8.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.8.*'" },
+    { name = "black", version = "25.11.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.9.*'" },
+    { name = "black", version = "26.3.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10'" },
+    { name = "pylint", version = "2.13.9", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.7.2'" },
+    { name = "pylint", version = "2.17.7", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.7.2' and python_full_version < '3.8'" },
+    { name = "pylint", version = "3.2.7", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.8.*'" },
+    { name = "pylint", version = "3.3.9", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.9.*'" },
+    { name = "pylint", version = "4.0.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10'" },
+    { name = "pytest", version = "7.0.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.7'" },
+    { name = "pytest", version = "7.4.4", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.7.*'" },
+    { name = "pytest", version = "8.3.5", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.8.*'" },
+    { name = "pytest", version = "8.4.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.9.*'" },
+    { name = "pytest", version = "9.0.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10'" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "platformdirs", specifier = ">=2.4.0" },
+    { name = "vosk", specifier = ">=0.3.45" },
+]
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "black", specifier = ">=22.8.0" },
+    { name = "pylint", specifier = ">=2.13.9" },
+    { name = "pytest", specifier = ">=7.0.1" },
 ]
 
 [[package]]

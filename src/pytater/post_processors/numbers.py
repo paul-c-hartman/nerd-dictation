@@ -1,5 +1,5 @@
 from typing import Tuple, Dict, Set, List, Optional, Any
-from nerd_dictation.post_processors import register_post_processor
+from pytater.post_processors import register_post_processor
 
 
 def from_words_to_digits_setup_once() -> (

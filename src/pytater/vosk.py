@@ -3,8 +3,8 @@ import subprocess
 import sys
 import time
 from typing import IO, Tuple, Callable, List, Optional
-from nerd_dictation.utilities import file_handle_make_non_blocking
-from nerd_dictation.config import settings
+from pytater.utilities import file_handle_make_non_blocking
+from pytater.config import settings
 
 
 def recording_proc_with_non_blocking_stdout(

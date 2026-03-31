@@ -17,8 +17,8 @@ def register_post_processor(
 
 
 # Built-in post processors that are always available
-import nerd_dictation.post_processors.full_sentence
-import nerd_dictation.post_processors.numbers
+import pytater.post_processors.full_sentence
+import pytater.post_processors.numbers
 
 
 def process_text(

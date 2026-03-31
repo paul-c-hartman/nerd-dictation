@@ -1,5 +1,6 @@
-from nerd_dictation.config import *
+from pytater.config import *
 from platformdirs import PlatformDirs
+
 
 def test_config():
     assert settings.all() == {
