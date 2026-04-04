@@ -12,11 +12,11 @@ See [demo video](https://www.youtube.com/watch?v=T7sR-4DFhpQ) (from ideasman42).
 This is a utility that provides simple access speech to text for using in Linux
 without being tied to a desktop environment, using the excellent [VOSK-API](https://github.com/alphacep/vosk-api).
 
-_**Simple to set up**_  
+***Simple to set up***  
    &nbsp;&nbsp;&nbsp;Pytater can be installed with a single command from PyPi.  
-_**Configurable**_  
+***Configurable***  
    &nbsp;&nbsp;&nbsp;Configure pytater using config files, environment variables, or the Python API (partially complete).  
-_**Zero Overhead**_  
+***Zero Overhead***  
    &nbsp;&nbsp;&nbsp;As pytater is activated manually, there are no background processes.
 
 ## Usage
@@ -26,6 +26,7 @@ It is suggested to bind begin/end/cancel to shortcut keys.
 ```sh
 pytater begin
 ```
+
 ```sh
 pytater end
 ```
@@ -38,6 +39,7 @@ For details on how this can be used, see:
 Specific features include:
 
 ### Numbers as Digits
+
 Optional conversion from numbers to digits.
 
 So `Three million five hundred and sixty second` becomes `3,000,562nd`.
@@ -47,16 +49,20 @@ A series of numbers (such as reciting a phone number) is also supported.
 So `Two four six eight` becomes `2,468`.
 
 ### Time Out
+
 Optionally end speech to text early when no speech is detected for a given number of seconds.
 (without an explicit call to `end` which is otherwise required).
 
 ### Output Type
+
 Output can simulate keystroke events (default) or simply print to the standard output.
 
 ## User configuration
+
 TODO: fill in this section
 
 ## Suspend/Resume
+
 Initial load time can be an issue for users on slower systems or with some of the larger language-models. In this case, suspend/resume can be useful. While suspended, all data is kept in memory and the process is stopped. Audio recording is stopped and restarted on resume.
 
 See `pytater begin --help` for details on how to access these options.
@@ -102,7 +108,7 @@ pipx install pytater
 # This will add a `pytater` command to your PATH
 ```
 
-Then download a model. The complete list of models is available [here](https://alphacephei.com/vosk/models). To do this:
+Then download a model. The complete list of models is available at [alphacephei's website](https://alphacephei.com/vosk/models). To do this:
 
 ```sh
 pytater download # to download the default model, or:
