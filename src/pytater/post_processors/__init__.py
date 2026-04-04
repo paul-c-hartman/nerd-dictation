@@ -59,10 +59,10 @@ def process_text(
         try:
             processor_options = options.get(name, {})
             if processor_options.get("enabled", False):
-                print(f"Running post processor {name!r} with options {processor_options!r}")
+                print(f"Running post processor {name!r} with options {processor_options!r}", file=sys.stderr)
                 words = post_process_fn(words, processor_options)
             else:
-                print(f"Skipping post processor {name!r} as it is not enabled")
+                print(f"Skipping post processor {name!r} as it is not enabled", file=sys.stderr)
         except Exception as ex:
             sys.stderr.write(f"Failed to run post processor {name!r} with error {str(ex)}\n")
             sys.exit(1)
