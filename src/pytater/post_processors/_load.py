@@ -6,7 +6,7 @@ Post-processors are functions that take a list of words and return a modified li
 import sys
 from typing import Any, Callable, Optional, List, Dict, Tuple
 
-post_processors: list[Tuple[str, int, Callable[[List[str], Dict[str, Any]], List[str]]]] = []
+post_processors: List[Tuple[str, int, Callable[[List[str], Dict[str, Any]], List[str]]]] = []
 
 
 def register_post_processor(
