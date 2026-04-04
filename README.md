@@ -145,6 +145,38 @@ SPEECH="$(pytater begin --timeout=1.0 --output=STDOUT)"
 - Text from VOSK is all lower-case. While the user configuration can be used to set the case of common words like `I`, this isn't very convenient.
 - For some users the delay in start up may be noticeable on systems with slower hard disks especially when running for the 1st time (a cold start). This is a limitation with the choice not to use a service that runs in the background. Recording begins before any the speech-to-text components are loaded to mitigate this problem.
 
+## Development
+
+```sh
+# Clone repository
+git clone https://github.com/paul-c-hartman/pytater.git
+cd pytater
+
+# Install dependencies
+python -m venv .venv
+pip install -e --group dev .
+# Or with uv:
+uv sync
+
+# Set up pre-commit hooks
+pre-commit install
+```
+
+To verify changes:
+
+```sh
+# Lint code
+pylint --recursive=y src/ test/
+
+# Format code
+black src/ test/
+
+# Run tests
+pytest
+```
+
+These commands are the ones run by the pre-commit hook.
+
 ## Roadmap
 
 - Complete and documented API (partially complete)

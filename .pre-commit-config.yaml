@@ -1,0 +1,24 @@
+repos:
+  - repo: local
+    hooks:
+      - id: black
+        name: Black
+        description: "Format Python code using Black"
+        entry: .venv/bin/black --check src/ test/
+        language: python
+        pass_filenames: false
+        always_run: true
+      - id: pylint
+        name: Pylint
+        description: "Lint Python code using Pylint"
+        entry: .venv/bin/pylint --recursive=y src/ test/
+        language: python
+        pass_filenames: false
+        always_run: true
+      - id: pytest
+        name: pytest
+        description: "Run tests using Pytest"
+        entry: .venv/bin/pytest
+        language: script
+        pass_filenames: false
+        always_run: true
