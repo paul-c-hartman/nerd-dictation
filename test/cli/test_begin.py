@@ -11,7 +11,7 @@ def func_stub(_):
 
 @pytest.fixture
 def setup_parser():
-    parser = argparse.ArgumentParser(prog='pytater-test')
+    parser = argparse.ArgumentParser(prog="pytater-test")
     subparsers = parser.add_subparsers()
     main(subparsers)
     subparsers.choices["begin"].set_defaults(func=func_stub)
@@ -83,7 +83,7 @@ def test_options_for_begin(setup_parser):
     assert args.input_method == "SOX"
     assert args.output == "STDOUT"
     assert args.simulate_input_tool == "DOTOOLC"
-    assert args.verbosity == 'verbose'
+    assert args.verbosity == "verbose"
 
 
 def test_default_options_for_begin(setup_parser):
@@ -108,7 +108,7 @@ def test_default_options_for_begin(setup_parser):
     assert args.input_method == "PAREC"
     assert args.output == "SIMULATE_INPUT"
     assert args.simulate_input_tool == "XDOTOOL"
-    assert args.verbosity == 'default'
+    assert args.verbosity == "default"
     assert args.rest is False
 
 
