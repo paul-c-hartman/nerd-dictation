@@ -9,7 +9,6 @@ requires-python = '>=3.7.0'
 description = 'Offline speech to text using VOSK. Based on nerd-dictation.'
 readme = 'README.md'
 keywords = ['voice', 'dictation', 'vosk', 'speech-to-text', 'speech', 'text']
-license = "GPL-2.0-or-later"
 classifiers = [
     "Operating System :: POSIX :: Linux",
     "Programming Language :: Python :: 3",
