@@ -19,7 +19,6 @@ def callback(args: argparse.Namespace) -> None:
     main_suspend(
         path_to_cookie=args.path_to_cookie,
         suspend=False,
-        verbose=1,
     )
 
 

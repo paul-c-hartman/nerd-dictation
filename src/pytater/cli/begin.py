@@ -4,7 +4,7 @@ When the `begin` command is used, the process is started and audio recording beg
 """
 
 import argparse
-from pytater.cli._common import argparse_cookie
+from pytater.cli._common import common_arguments
 from pytater.main import main_begin
 
 
@@ -36,7 +36,6 @@ def callback(args: argparse.Namespace) -> None:
         output=args.output,
         simulate_input_tool=args.simulate_input_tool,
         suspend_on_start=args.suspend_on_start,
-        verbose=args.verbose,
         vosk_grammar_file=args.vosk_grammar_file,
     )
 
@@ -57,7 +56,7 @@ def main(subparsers: "argparse._SubParsersAction[argparse.ArgumentParser]") -> N
         formatter_class=argparse.RawTextHelpFormatter,
     )
 
-    argparse_cookie(subparse)
+    common_arguments(subparse)
 
     subparse.add_argument(
         "--config",
@@ -323,20 +322,6 @@ def main(subparsers: "argparse._SubParsersAction[argparse.ArgumentParser]") -> N
             "- ``WTYPE`` Compatible with Wayland.\n"
             "- ``STDOUT`` Bare stdout with Ctrl-H for backspaces.\n"
             "  For help on setting up ydotool, see ``readme-ydotool.md`` in the pytater repository.\n"
-        ),
-        required=False,
-    )
-
-    subparse.add_argument(
-        "--verbose",
-        dest="verbose",
-        default=0,
-        type=int,
-        help=(
-            "Verbosity level, defaults to zero (no output except for errors)\n"
-            "\n"
-            "- Level 1: report top level actions (dictation started, suspended .. etc).\n"
-            "- Level 2: report internal details (may be noisy)."
         ),
         required=False,
     )

@@ -5,6 +5,7 @@ Post-processors are functions that take a list of words and return a modified li
 
 import sys
 from typing import Any, Callable, Optional, List, Dict, Tuple
+from pytater.logging import logger
 
 post_processors: List[Tuple[str, int, Callable[[List[str], Dict[str, Any]], List[str]]]] = []
 
@@ -54,12 +55,12 @@ def process_text(
         try:
             processor_options = options.get(name, {})
             if processor_options.get("enabled", False):
-                print(f"Running post processor {name!r} with options {processor_options!r}", file=sys.stderr)
+                logger.debug("Running post processor %r with options %r", name, processor_options)
                 words = post_process_fn(words, processor_options)
             else:
-                print(f"Skipping post processor {name!r} as it is not enabled", file=sys.stderr)
+                logger.debug("Skipping post processor %r as it is not enabled", name)
         except Exception as ex:
-            sys.stderr.write(f"Failed to run post processor {name!r} with error {str(ex)}\n")
+            logger.error("Failed to run post processor %r with error %s", name, str(ex))
             sys.exit(1)
 
     return " ".join(words)

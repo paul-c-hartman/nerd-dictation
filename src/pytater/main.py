@@ -5,7 +5,6 @@ It contains the main functions that are called when the user runs the applicatio
 
 # All built in modules.
 import os
-import sys
 import tempfile
 import time
 
@@ -18,6 +17,7 @@ from pytater.utilities import touch, file_mtime_or_none, file_age_in_seconds, fi
 from pytater.post_processors import process_text
 from pytater.vosk import text_from_vosk_pipe
 from pytater.simulate_input import input_fns
+from pytater.logging import logger
 
 
 def main_begin(
@@ -41,7 +41,6 @@ def main_begin(
     output: str = "TYPE",
     simulate_input_tool: str = "XDOTOOL",
     suspend_on_start: bool = False,
-    verbose: int = 0,
     vosk_grammar_file: str = "",
 ) -> None:
     """Initialize audio recording so that full text-to-speech conversion can take place.
@@ -68,7 +67,6 @@ def main_begin(
         output: The method to use for outputting the transcribed text. Supported values are "SIMULATE_INPUT" for using a specified input simulation tool.
         simulate_input_tool: The tool to use for simulating input when `output` is set to "SIMULATE_INPUT".
         suspend_on_start: Whether to suspend the recording process immediately after starting, allowing it to be resumed later.
-        verbose: The verbosity level for logging. Higher values result in more verbose output.
         vosk_grammar_file: The path to a VOSK grammar file to use for constraining the speech recognition. If empty, no grammar will be used.
 
     Raises:
@@ -107,7 +105,7 @@ def main_begin(
     touch(path_to_cookie, mtime=0)
     cookie_timestamp = file_mtime_or_none(path_to_cookie)
     if cookie_timestamp != 0:
-        sys.stderr.write("Cookie removed after right after creation (unlikely but respect the request)\n")
+        logger.warning("Cookie removed after right after creation (unlikely but respect the request)\n")
         return
 
     #
@@ -196,12 +194,11 @@ def main_begin(
         process_fn=process_fn,
         handle_fn=handle_fn,
         suspend_on_start=suspend_on_start,
-        verbose=verbose,
         vosk_grammar_file=vosk_grammar_file,
     )
 
     if not found_any:
-        sys.stderr.write("No text found in the audio\n")
+        logger.warning("No text found in the audio\n")
         # Avoid continuing punctuation from where this recording (which recorded nothing) left off.
         touch(path_to_cookie)
         return
@@ -220,7 +217,7 @@ def main_end(
         path_to_cookie = os.path.join(tempfile.gettempdir(), settings.temp_cookie_name)
 
     # Resume (does nothing if not suspended), so suspending doesn't prevent the cancel operation.
-    main_suspend(path_to_cookie=path_to_cookie, suspend=False, verbose=0)
+    main_suspend(path_to_cookie=path_to_cookie, suspend=False)
 
     touch(path_to_cookie)
 
@@ -238,7 +235,7 @@ def main_cancel(
         path_to_cookie = os.path.join(tempfile.gettempdir(), settings.temp_cookie_name)
 
     # Resume (does nothing if not suspended), so suspending doesn't prevent the cancel operation.
-    main_suspend(path_to_cookie=path_to_cookie, suspend=False, verbose=0)
+    main_suspend(path_to_cookie=path_to_cookie, suspend=False)
 
     file_remove_if_exists(path_to_cookie)
 
@@ -247,14 +244,12 @@ def main_suspend(
     *,
     path_to_cookie: str = "",
     suspend: bool,
-    verbose: int,
 ) -> None:
     """Suspend or resume the recording process.
 
     Args:
         path_to_cookie: The path to the cookie file used for managing the recording state. If empty, a default path will be used.
         suspend: Whether to suspend (True) or resume (False) the recording process.
-        verbose: The verbosity level for logging. Higher values result in more verbose output.
     """
     import signal
 
@@ -262,8 +257,7 @@ def main_suspend(
         path_to_cookie = os.path.join(tempfile.gettempdir(), settings.temp_cookie_name)
 
     if not os.path.exists(path_to_cookie):
-        if verbose >= 1:
-            sys.stderr.write(f"No running pytater cookie found at: {path_to_cookie}, abort!\n")
+        logger.info("No running pytater cookie found at: %s, abort!\n", str(path_to_cookie))
         return
 
     with open(path_to_cookie, "r", encoding="utf-8") as fh:
@@ -271,8 +265,7 @@ def main_suspend(
     try:
         pid = int(data)
     except Exception as ex:
-        if verbose >= 1:
-            sys.stderr.write(f"Failed to read PID with error {ex}, abort!\n")
+        logger.info("Failed to read PID with error %s, abort!\n", str(ex))
         return
 
     if suspend:

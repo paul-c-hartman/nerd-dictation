@@ -10,6 +10,7 @@ import stat
 import time
 from types import ModuleType
 from typing import Optional, IO, List
+from pytater.logging import logger
 
 # -----------------------------------------------------------------------------
 # General Utilities
@@ -26,7 +27,7 @@ def run_command_or_exit_on_failure(cmd: List[str]) -> None:
     # Don't catch other kinds of exceptions as they should never happen
     # and can be considered a severe error which doesn't need to be made "user friendly".
     except FileNotFoundError as ex:
-        sys.stderr.write(f"Command {cmd[0]!r} not found: {ex}\n")
+        logger.error("Command %r not found: %s\n", cmd[0], ex)
         sys.exit(1)
 
 

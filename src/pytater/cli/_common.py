@@ -3,6 +3,45 @@
 import argparse
 
 
+def common_arguments(subparse: argparse.ArgumentParser) -> None:
+    """Add common arguments to the given subparser.
+
+    These arguments are used by multiple subcommands in the `pytater` CLI.
+
+    Args:
+        subparse: The argument parser to which the common arguments should be added.
+    """
+    argparse_verbosity(subparse)
+    argparse_cookie(subparse)
+
+
+def argparse_verbosity(subparse: argparse.ArgumentParser) -> None:
+    """Add the `--verbose` and `--debug` arguments to the given subparser.
+
+    These arguments are used to set the logging verbosity level for the subcommand.
+
+    Args:
+        subparse: The argument parser to which the `--verbose` and `--debug` arguments should be added.
+    """
+    group = subparse.add_mutually_exclusive_group()
+    group.add_argument(
+        "--verbose",
+        dest="verbosity",
+        action="store_const",
+        const="verbose",
+        default="default",
+        help="Enable verbose logging output for this command.",
+    )
+    group.add_argument(
+        "--debug",
+        dest="verbosity",
+        action="store_const",
+        const="debug",
+        default="default",
+        help="Enable debug logging output for this command.",
+    )
+
+
 def argparse_cookie(subparse: argparse.ArgumentParser) -> None:
     """Add the `--cookie` argument to the given subparser.
 

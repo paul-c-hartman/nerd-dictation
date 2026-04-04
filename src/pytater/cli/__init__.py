@@ -56,4 +56,10 @@ def main(argv: Optional[List[str]] = None) -> None:
         parser.print_help()
         return
 
+    # Check for common arguments
+    if hasattr(args, "verbosity"):
+        from pytater.logging import set_verbosity
+
+        set_verbosity(args.verbosity)
+
     args.func(args)

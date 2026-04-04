@@ -18,7 +18,6 @@ Typical usage example:
         input_method="PAREC",
         pulse_device_name="",
         suspend_on_start=False,
-        verbose=0,
         vosk_grammar_file="",
     )
 """
@@ -33,6 +32,7 @@ from types import ModuleType
 from typing import IO, Tuple, Callable, List, Optional
 from pytater.utilities import file_handle_make_non_blocking
 from pytater.config import settings
+from pytater.logging import logger
 
 
 def recording_proc_with_non_blocking_stdout(
@@ -83,7 +83,7 @@ def recording_proc_with_non_blocking_stdout(
             "-",
         )
     else:
-        sys.stderr.write(f"--input {input_method!r} not supported.\n")
+        logger.error("--input %s not supported.\n", input_method)
         sys.exit(1)
 
     ps = subprocess.Popen(cmd, stdout=subprocess.PIPE)
@@ -136,7 +136,6 @@ def text_from_vosk_pipe(
     input_method: str,
     pulse_device_name: str = "",
     suspend_on_start: bool = False,
-    verbose: int = 0,
     vosk_grammar_file: str = "",
 ) -> bool:
     """Runs the VOSK speech recognition process and handles the output according to the provided functions and parameters.
@@ -156,7 +155,6 @@ def text_from_vosk_pipe(
         input_method: The method to use for audio input. Supported values are "PAREC", "SOX", and "PW-CAT".
         pulse_device_name: The name of the PulseAudio device to use for recording (only applicable if input_method is "PAREC").
         suspend_on_start: If True, the recording process will start in a suspended state and will need to be resumed with a signal (e.g., SIGCONT).
-        verbose: The verbosity level for logging. Higher values will produce more detailed logs.
         vosk_grammar_file: The path to a file containing a JSON array of grammar rules for VOSK. If empty, no grammar will be used.
 
     Returns:
@@ -166,7 +164,7 @@ def text_from_vosk_pipe(
     import json
 
     if not os.path.exists(vosk_model_dir):
-        sys.stderr.write("Please download a model using `pytater download`.\n")
+        logger.error("Please download a model using `pytater download`.")
         sys.exit(1)
 
     has_ps, ps, stdout, vosk = load_vosk_pipe(input_method, sample_rate, pulse_device_name, suspend_on_start)
@@ -178,8 +176,7 @@ def text_from_vosk_pipe(
             grammar_json = fh.read()
 
     # Allow for loading the model to take some time:
-    if verbose >= 1:
-        sys.stderr.write("Loading model...\n")
+    logger.info("Loading model...")
     model = vosk.Model(vosk_model_dir)
 
     if grammar_json == "":
@@ -187,8 +184,7 @@ def text_from_vosk_pipe(
     else:
         rec = vosk.KaldiRecognizer(model, sample_rate, grammar_json)
 
-    if verbose >= 1:
-        sys.stderr.write("Model loaded.\n")
+    logger.info("Model loaded.")
 
     # 1mb
     block_size = 1_048_576
@@ -321,9 +317,7 @@ def text_from_vosk_pipe(
         # Clear the buffer:
         handle_fn_suspended()
 
-        nonlocal verbose
-        if verbose >= 1:
-            sys.stderr.write("Recording suspended.\n")
+        logger.info("Recording suspended.\n")
 
         # Close the recording process.
         if has_ps:
@@ -341,9 +335,7 @@ def text_from_vosk_pipe(
         nonlocal has_ps, ps, stdout
 
         # Resume reading from the recording process.
-        nonlocal verbose
-        if verbose >= 1:
-            sys.stderr.write("Recording.\n")
+        logger.info("Recording.\n")
 
         handle_fn(settings.simulate_input_code_command, "SETUP")
         ps, stdout = recording_proc_start(input_method, sample_rate, pulse_device_name)
@@ -366,8 +358,7 @@ def text_from_vosk_pipe(
         suspend = False
 
     def handle_sig_reload_from_hup(_signum: int, _frame: Optional[FrameType]) -> None:
-        if verbose >= 1:
-            sys.stderr.write("Reload.\n")
+        logger.info("Reload.\n")
         process_fn("")
 
     import signal
@@ -462,7 +453,7 @@ def text_from_vosk_pipe(
         handle_fn(settings.simulate_input_code_command, "TEARDOWN")
 
     if code == -1:
-        sys.stderr.write("Text input canceled!\n")
+        logger.warning("Text input canceled!\n")
         sys.exit(0)
 
     # This writes many JSON blocks, use the last one.

@@ -1,5 +1,8 @@
 """This module provides helpers for downloading and managing VOSK speech recognition models for use with the pytater application."""
 
+# This file uses `sys.stderr.write` instead of the pytater logger because it only prints output that is meant to be read in normal usage.
+# The logger is meant to be used during the transcription process, while this subcommand is meant to be used before/separately.
+
 import os
 import sys
 import shutil
@@ -51,9 +54,9 @@ def download_and_extract_model(model_url: str, extract_to: str) -> None:
         extract_to: The directory to extract the model to.
     """
     with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
-        print(f"Downloading model from {model_url}.\nThis may take a minute...")
+        sys.stderr.write(f"Downloading model from {model_url}.\nThis may take a minute...\n")
         urllib.request.urlretrieve(model_url, tmp_file.name, download_progress)
-        print("Download complete. Extracting...")
+        sys.stderr.write("Download complete. Extracting...\n")
         with zipfile.ZipFile(tmp_file.name, "r") as zip_ref:
             zip_ref.extractall(extract_to)
         # zipfile extracts the model, but the model files are actually
@@ -62,7 +65,7 @@ def download_and_extract_model(model_url: str, extract_to: str) -> None:
         for item in os.listdir(extracted_model_folder):
             shutil.move(os.path.join(extracted_model_folder, item), os.path.join(extract_to, item))
         os.rmdir(extracted_model_folder)
-        print(f"Model extracted to {extract_to}")
+        sys.stderr.write(f"Model extracted to {extract_to}\n")
     os.remove(tmp_file.name)
 
 
@@ -84,7 +87,7 @@ def set_model(directory: str) -> None:
         else:
             os.remove(expected_model_path)
     os.makedirs(os.path.dirname(expected_model_path), exist_ok=True)
-    print(f"Symlinking from {expected_model_path} to {directory}")
+    sys.stderr.write(f"Symlinking from {expected_model_path} to {directory}\n")
     os.symlink(directory, expected_model_path)  # os.symlink takes the destination first for some reason
 
 
@@ -104,26 +107,26 @@ def main(model_name: str = DEFAULT_MODEL, force: bool = False, confirmation: boo
         model_path = os.path.join(model_path, model_name)
     else:
         # Assume it's a custom URL
-        print(f"Using custom model URL: {model_name}")
-        print("WARNING: The `download` subcommand can only load one custom-URL model at a time.")
-        print("Consider using `--vosk-model-dir` when calling `pytater begin` instead.")
+        sys.stderr.write(f"Using custom model URL: {model_name}\n")
+        sys.stderr.write("WARNING: The `download` subcommand can only load one custom-URL model at a time.\n")
+        sys.stderr.write("Consider using `--vosk-model-dir` when calling `pytater begin` instead.\n")
         model_path = os.path.join(model_path, "custom_model")
 
     if not os.path.exists(model_path):
-        print("Downloading model...")
+        sys.stderr.write("Downloading model...\n")
         os.makedirs(model_path)
         download_and_extract_model(model, model_path)
     elif force:
         if not confirmation:
             confirm = input("CAUTION: If there is a model present, this will overwrite it. Are you sure? [yN] ")
             if confirm.lower() != "y":
-                print("Aborting model download.")
+                sys.stderr.write("Aborting model download.\n")
                 return
-        print("Forcing download of model")
+        sys.stderr.write("Forcing download of model\n")
         if os.path.exists(model_path):
             shutil.rmtree(model_path)
         os.makedirs(model_path)
         download_and_extract_model(model, model_path)
     else:
-        print(f"Model already exists at {model_path}.")
+        sys.stderr.write(f"Model already exists at {model_path}.\n")
     set_model(model_path)
