@@ -3,11 +3,11 @@
 For example, `["hello", "world"]` -> `["Hello", "world"]`. The `full_sentence` post-processor has a priority of 100, meaning it should run after most other post-processors. This is to ensure that other post-processors that may adjust word order do not cause words that aren't first to be capitalized.
 """
 
-from typing import Any, Optional
+from typing import Any, Optional, List, Dict
 from pytater.post_processors._load import register_post_processor
 
 
-def full_sentence(words: list[str], options: Optional[dict[str, Any]] = None) -> list[str]:
+def full_sentence(words: List[str], options: Optional[Dict[str, Any]] = None) -> List[str]:
     """Post-processor that capitalizes the first word of a sentence and leaves the rest of the words unchanged.
 
     For example, `["hello", "world"]` -> `["Hello", "world"]`.

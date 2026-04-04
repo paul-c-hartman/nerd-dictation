@@ -3,11 +3,11 @@
 It's meant to be used solely as an example of how to implement a post-processor. Post-processors should implement some function taking a list of words and an optional dictionary of options and return a modified list of words, and then be registered using the `pytater.post_processors.register_post_processor` function with a name and a priority.
 """
 
-from typing import Any, Optional
+from typing import Any, Optional, List, Dict
 from pytater.post_processors._load import register_post_processor
 
 
-def capitalize_all_words(words: list[str], options: Optional[dict[str, Any]] = None) -> list[str]:
+def capitalize_all_words(words: List[str], options: Optional[Dict[str, Any]] = None) -> List[str]:
     """Example post-processor that capitalizes every word in the text.
 
     For example, `["hello", "world"]` -> `["Hello", "World"]`.

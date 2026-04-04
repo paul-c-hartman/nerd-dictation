@@ -529,7 +529,7 @@ class from_words_to_digits:
                 i += 1
 
 
-def replace_numbers(words: list[str], options: Optional[dict[str, Any]] = None) -> list[str]:
+def replace_numbers(words: List[str], options: Optional[Dict[str, Any]] = None) -> List[str]:
     """Post-processor that replaces numbers expressed in English words with their digit representations.
 
     For example, `["twenty", "five"]` -> `["25"]`.

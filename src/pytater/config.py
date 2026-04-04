@@ -10,7 +10,7 @@ Typical usage example:
     print(settings.simulate_input_code_command)  # Access the simulate input code command
 """
 
-from typing import Any
+from typing import Any, Dict
 from platformdirs import PlatformDirs
 
 
@@ -30,7 +30,7 @@ class Config:
         self.temp_cookie_name = "pytater.cookie"
         self.simulate_input_code_command = -1
 
-    def all(self) -> dict[str, Any]:
+    def all(self) -> Dict[str, Any]:
         """Get all configuration settings.
 
         Returns:

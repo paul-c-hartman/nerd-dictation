@@ -4,13 +4,13 @@ Post-processors are functions that take a list of words and return a modified li
 """
 
 import sys
-from typing import Any, Callable, Optional
+from typing import Any, Callable, Optional, List, Dict, Tuple
 
-post_processors: list[tuple[str, int, Callable[[list[str], dict[str, Any]], list[str]]]] = []
+post_processors: list[Tuple[str, int, Callable[[List[str], Dict[str, Any]], List[str]]]] = []
 
 
 def register_post_processor(
-    name: str, priority: int, post_process_fn: Callable[[list[str], dict[str, Any]], list[str]]
+    name: str, priority: int, post_process_fn: Callable[[List[str], Dict[str, Any]], List[str]]
 ) -> None:
     """Register a post processor function that will be called to process the text after it is recognized.
 
@@ -24,7 +24,7 @@ def register_post_processor(
 
 def process_text(
     text: str,
-    options: Optional[dict[str, dict[str, Any]]] = None,
+    options: Optional[Dict[str, Dict[str, Any]]] = None,
     # full_sentence: bool = False, # options['full_sentence']['enabled']: bool
     # numbers_as_digits: bool = False, # options['numbers']['as_digits']: bool
     # numbers_use_separator: bool = False, # options['numbers']['use_separator']: bool

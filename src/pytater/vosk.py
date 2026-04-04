@@ -105,7 +105,7 @@ def recording_proc_start(
 
 def load_vosk_pipe(
     input_method: str, sample_rate: int, pulse_device_name: str, suspend_on_start: bool = False
-) -> tuple[bool, Optional[subprocess.Popen[bytes]], Optional[IO[bytes]], ModuleType]:
+) -> Tuple[bool, Optional["subprocess.Popen[bytes]"], Optional[IO[bytes]], ModuleType]:
     """Loads the VOSK library and its dependencies.
 
     This function is used to delay the import of the VOSK library until it is actually needed, which can help reduce startup time for the application.
