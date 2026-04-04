@@ -43,7 +43,7 @@ def argparse_create() -> argparse.ArgumentParser:
 
 def main(argv: Optional[List[str]] = None) -> None:
     """Main entry point for the `pytater` CLI.
-    
+
     Parses command-line arguments and dispatches to the appropriate sub-command callback.
 
     Args:

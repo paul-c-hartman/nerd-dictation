@@ -16,7 +16,7 @@ from platformdirs import PlatformDirs
 
 class Config:
     """Configuration for pytater.
-    
+
     This includes paths and other settings that may be used across the application.
 
     Attributes:
@@ -24,6 +24,7 @@ class Config:
         temp_cookie_name: The name of the temporary cookie file used for monitoring dictation state.
         simulate_input_code_command: The command code used to simulate input, which may be used for triggering actions in the application.
     """
+
     def __init__(self):
         self.dirs = PlatformDirs("pytater", "paul-c-hartman", ensure_exists=True)
         self.temp_cookie_name = "pytater.cookie"

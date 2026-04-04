@@ -9,7 +9,7 @@ from pytater.post_processors._load import register_post_processor
 
 def full_sentence(words: list[str], options: Optional[dict[str, Any]] = None) -> list[str]:
     """Post-processor that capitalizes the first word of a sentence and leaves the rest of the words unchanged.
-    
+
     For example, `["hello", "world"]` -> `["Hello", "world"]`.
 
     Args:

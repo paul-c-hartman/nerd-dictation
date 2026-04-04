@@ -9,13 +9,13 @@ from pytater.post_processors._load import register_post_processor
 
 def capitalize_all_words(words: list[str], options: Optional[dict[str, Any]] = None) -> list[str]:
     """Example post-processor that capitalizes every word in the text.
-    
+
     For example, `["hello", "world"]` -> `["Hello", "World"]`.
 
     Args:
         words: The list of words to process.
         options: An optional dictionary of options for the post-processor. This post-processor does not use any options, but the parameter is included for consistency with the post-processor interface.
-    
+
     Returns:
         A new list of words with every word capitalized.
     """

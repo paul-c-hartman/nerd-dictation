@@ -1,5 +1,4 @@
-"""This module allows pytater to simulate input using the `dotool` command line utility or `dotoolc`, which is dotool's background service.
-"""
+"""This module allows pytater to simulate input using the `dotool` command line utility or `dotoolc`, which is dotool's background service."""
 
 import subprocess
 import os

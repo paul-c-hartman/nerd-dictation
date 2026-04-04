@@ -10,7 +10,7 @@ from pytater.download_model import main as download_model, MODELS, DEFAULT_MODEL
 
 def callback(args: argparse.Namespace) -> None:
     """Callback function for `pytater download`.
-    
+
     Calls the `download_model` function with the appropriate arguments.
 
     Args:

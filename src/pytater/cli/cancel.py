@@ -10,7 +10,7 @@ from pytater.main import main_cancel
 
 def callback(args: argparse.Namespace) -> None:
     """Callback function for `pytater cancel`.
-    
+
     Calls the `main_cancel` function with the appropriate arguments.
 
     Args:

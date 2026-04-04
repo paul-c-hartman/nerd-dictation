@@ -36,7 +36,7 @@ def process_text(
     Args:
         text: The text to process.
         options: An optional dictionary of options for the post processors. The keys are the names of the post processors, and the values are dictionaries of options for each post processor. Each set of options is passed to the corresponding post processor when it is run.
-    
+
     Returns:
         The processed text after all post processors have been applied.
     """

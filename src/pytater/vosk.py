@@ -97,11 +97,15 @@ def recording_proc_with_non_blocking_stdout(
 
 
 # NOTE: typed as a string for Py3.6 compatibility.
-def recording_proc_start(input_method: str, sample_rate: int, pulse_device_name: str) -> "Tuple[subprocess.Popen[bytes], IO[bytes]]":
+def recording_proc_start(
+    input_method: str, sample_rate: int, pulse_device_name: str
+) -> "Tuple[subprocess.Popen[bytes], IO[bytes]]":
     return recording_proc_with_non_blocking_stdout(input_method, sample_rate, pulse_device_name)
 
 
-def load_vosk_pipe(input_method: str, sample_rate: int, pulse_device_name: str, suspend_on_start: bool = False) -> tuple[bool, Optional[subprocess.Popen[bytes]], Optional[IO[bytes]], ModuleType]:
+def load_vosk_pipe(
+    input_method: str, sample_rate: int, pulse_device_name: str, suspend_on_start: bool = False
+) -> tuple[bool, Optional[subprocess.Popen[bytes]], Optional[IO[bytes]], ModuleType]:
     """Loads the VOSK library and its dependencies.
 
     This function is used to delay the import of the VOSK library until it is actually needed, which can help reduce startup time for the application.
@@ -136,7 +140,7 @@ def text_from_vosk_pipe(
     vosk_grammar_file: str = "",
 ) -> bool:
     """Runs the VOSK speech recognition process and handles the output according to the provided functions and parameters.
-    
+
     This function is the core of the speech recognition process, handling the recording of audio, processing it with VOSK, and managing the output based on the provided callbacks and settings.
 
     Args:
@@ -154,7 +158,7 @@ def text_from_vosk_pipe(
         suspend_on_start: If True, the recording process will start in a suspended state and will need to be resumed with a signal (e.g., SIGCONT).
         verbose: The verbosity level for logging. Higher values will produce more detailed logs.
         vosk_grammar_file: The path to a file containing a JSON array of grammar rules for VOSK. If empty, no grammar will be used.
-    
+
     Returns:
         A boolean indicating whether any text was handled during the recording process.
     """
@@ -162,9 +166,7 @@ def text_from_vosk_pipe(
     import json
 
     if not os.path.exists(vosk_model_dir):
-        sys.stderr.write(
-            "Please download a model using `pytater download`.\n"
-        )
+        sys.stderr.write("Please download a model using `pytater download`.\n")
         sys.exit(1)
 
     has_ps, ps, stdout, vosk = load_vosk_pipe(input_method, sample_rate, pulse_device_name, suspend_on_start)
@@ -328,8 +330,8 @@ def text_from_vosk_pipe(
             # Support setting up input simulation state.
             handle_fn(settings.simulate_input_code_command, "TEARDOWN")
 
-            stdout.close() # type: ignore     stdout is not None here because this is only called when has_ps is True.
-            os.kill(ps.pid, signal.SIGINT) # type: ignore     ps is not None here because this is only called when has_ps is True.
+            stdout.close()  # type: ignore     stdout is not None here because this is only called when has_ps is True.
+            os.kill(ps.pid, signal.SIGINT)  # type: ignore     ps is not None here because this is only called when has_ps is True.
             del stdout, ps
             has_ps = False
 
@@ -405,7 +407,7 @@ def text_from_vosk_pipe(
 
         if idle_time > 0.0:
             # Monkeypatch to fix "possibly unbound":
-            idle_time_prev = time.time() if "idle_time_prev" not in locals() else idle_time_prev # type: ignore
+            idle_time_prev = time.time() if "idle_time_prev" not in locals() else idle_time_prev  # type: ignore
             # Subtract processing time from the previous loop.
             # Skip idling in the event dictation can't keep up with the recording.
             idle_time_curr = time.time()
@@ -421,7 +423,7 @@ def text_from_vosk_pipe(
         # Only the 1st entry in the loop reads a lot of data due to the time it takes to initialize the VOSK module.
         try:
             # stdout is not None here because `recording_proc_start` has been called by this point.
-            data = stdout.read(block_size) # type: ignore
+            data = stdout.read(block_size)  # type: ignore
         except (NameError, ValueError):
             # Start recording if `stdout` is not yet open (NameError), or if it
             # was closed via suspend (ValueError).  This can happen either due
@@ -452,7 +454,7 @@ def text_from_vosk_pipe(
     if has_ps:
         # stdout.close(), no need, this is exiting.
         # ps is not None here because `recording_proc_start` has been called by this point.
-        os.kill(ps.pid, signal.SIGINT) # type: ignore
+        os.kill(ps.pid, signal.SIGINT)  # type: ignore
         del ps, stdout
         has_ps = False
 

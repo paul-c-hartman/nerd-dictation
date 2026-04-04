@@ -17,7 +17,7 @@ from typing import Optional, IO, List
 
 def run_command_or_exit_on_failure(cmd: List[str]) -> None:
     """Run a command and exit with an error message if the command fails.
-    
+
     Args:
         cmd: The command to run, as a list of strings.
     """
@@ -32,7 +32,7 @@ def run_command_or_exit_on_failure(cmd: List[str]) -> None:
 
 def touch(filepath: str, mtime: Optional[int] = None) -> None:
     """Touch a file, creating it if it doesn't exist and updating its modification time.
-    
+
     Args:
         filepath: The path to the file to touch.
         mtime: The modification time to set, or None to use the current time.
@@ -54,7 +54,7 @@ def file_mtime_or_none(filepath: str) -> Optional[int]:
 
     Args:
         filepath: The path to the file to check.
-    
+
     Returns:
         The modification time of the file, or None if the file does not exist.
     """
@@ -70,7 +70,7 @@ def file_age_in_seconds(filepath: str) -> float:
 
     Args:
         filepath: The path to the file to check.
-    
+
     Returns:
         The age of the file in seconds.
     """
@@ -94,7 +94,7 @@ def file_remove_if_exists(filepath: str) -> bool:
 
 def file_handle_make_non_blocking(file_handle: IO[bytes]) -> None:
     """Make a file handle non-blocking.
-    
+
     Args:
         file_handle: The file handle to make non-blocking.
     """
@@ -111,7 +111,7 @@ def execfile(filepath: str, mod: Optional[ModuleType] = None) -> Optional[Module
     Args:
         filepath: The path to the Python script to execute.
         mod: An optional module to execute the script in. If None, a new module will be created.
-    
+
     Returns:
         The module that the script was executed in.
     """

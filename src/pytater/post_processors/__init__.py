@@ -7,6 +7,5 @@ Post-processors are functions that take a list of words and return a modified li
 import pytater.post_processors.full_sentence
 import pytater.post_processors.numbers
 
-
 # API for registering and running post processors
 from pytater.post_processors._load import register_post_processor, process_text, post_processors

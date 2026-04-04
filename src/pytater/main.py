@@ -212,7 +212,7 @@ def main_end(
     path_to_cookie: str = "",
 ) -> None:
     """End the recording process, finalizing any remaining tasks.
-    
+
     Args:
         path_to_cookie: The path to the cookie file used for managing the recording state. If empty, a default path will be used.
     """

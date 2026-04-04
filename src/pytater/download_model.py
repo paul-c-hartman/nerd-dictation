@@ -1,5 +1,4 @@
-"""This module provides helpers for downloading and managing VOSK speech recognition models for use with the pytater application.
-"""
+"""This module provides helpers for downloading and managing VOSK speech recognition models for use with the pytater application."""
 
 import os
 import sys
@@ -21,7 +20,7 @@ DEFAULT_MODEL = "small"
 
 def download_progress(block_num: int, block_size: int, total_size: int) -> None:
     """Report download progress to stderr.
-    
+
     Only runs if pytater is running interactively.
 
     Args:
@@ -29,7 +28,7 @@ def download_progress(block_num: int, block_size: int, total_size: int) -> None:
         block_size: The size of each block in bytes.
         total_size: The total size of the file in bytes.
     """
-    if hasattr(sys, 'ps1'):
+    if hasattr(sys, "ps1"):
         read_so_far = block_num * block_size
         if total_size > 0:
             percent = read_so_far * 1e2 / total_size
@@ -44,7 +43,7 @@ def download_progress(block_num: int, block_size: int, total_size: int) -> None:
 
 def download_and_extract_model(model_url: str, extract_to: str) -> None:
     """Download a model from the given URL and extract it to the specified directory.
-    
+
     Assumes the URL points to a zip file.
 
     Args:

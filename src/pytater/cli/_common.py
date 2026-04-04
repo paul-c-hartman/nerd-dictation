@@ -1,12 +1,11 @@
-"""This module contains common code used by multiple subcommands in the `pytater` CLI.
-"""
+"""This module contains common code used by multiple subcommands in the `pytater` CLI."""
 
 import argparse
 
 
 def argparse_cookie(subparse: argparse.ArgumentParser) -> None:
     """Add the `--cookie` argument to the given subparser.
-    
+
     This argument is used to specify the location of a temporary cookie file that is monitored to begin/end dictation.
 
     Args:

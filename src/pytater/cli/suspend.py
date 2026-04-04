@@ -10,7 +10,7 @@ from pytater.main import main_suspend
 
 def callback(args: argparse.Namespace) -> None:
     """Callback function for `pytater suspend`.
-    
+
     Calls the `main_suspend` function with the appropriate arguments.
 
     Args:

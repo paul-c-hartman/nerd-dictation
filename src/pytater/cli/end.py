@@ -10,7 +10,7 @@ from pytater.main import main_end
 
 def callback(args: argparse.Namespace) -> None:
     """Callback function for `pytater end`.
-    
+
     Calls the `main_end` function with the appropriate arguments.
 
     Args:
